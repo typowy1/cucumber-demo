@@ -1,6 +1,5 @@
 # language: pl
 
-  @wip
   Właściwość: Wypłata pieniędzy z bankomatu
 
     Mogę wypłacić pieniądze z bankomatu, jeżeli moje saldo jest dodatnie
