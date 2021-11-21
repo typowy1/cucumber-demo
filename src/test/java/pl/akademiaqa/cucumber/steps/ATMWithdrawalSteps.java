@@ -4,6 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pl.akademiaqa.dto.AccountDto;
 
 import java.util.List;
 import java.util.Map;
@@ -31,8 +32,8 @@ public class ATMWithdrawalSteps {
     }
 
 
-    @Given("I have positive balance on my account")
-    public void iHavePositiveBalanceOnMyAccount(DataTable dataTable) {
+//    @Given("I have positive balance on my account")
+//    public void iHavePositiveBalanceOnMyAccount(DataTable dataTable) {
         //1 podejscie lista list nie polecane
 //        List<List<String>> lists = dataTable.asLists();//pracowanie z lista list, sposob nie polecany
 //
@@ -43,18 +44,31 @@ public class ATMWithdrawalSteps {
 //        2. podejscie lista map, czytelmiejsze
 //        Polecany sposób to lista map, zwieksza czytelnosc poprzez dodania naglowka w tabeli, mozesz wyciagac wartosci po nazwie klucza
 
-        List<Map<String, String>> maps = dataTable.asMaps(); //posiada klucz i wartosc dzieki naglowka w tabeli, naglowki sa kluczami
-        for (Map<String, String> columns : maps) {
-            System.out.println(columns.get("account") + " " + columns.get("balance")); //wyciągamy wartości za pomocą klucza
-        }
+//        List<Map<String, String>> maps = dataTable.asMaps(); //posiada klucz i wartosc dzieki naglowka w tabeli, naglowki sa kluczami
+//        for (Map<String, String> columns : maps) {
+//            System.out.println(columns.get("account") + " " + columns.get("balance")); //wyciągamy wartości za pomocą klucza
+//        }
         //tak wygląda lista map
 //        [
 //          {"account": "saving account", "balance": "50"},
 //          {"account": "debit account", "balance": "20"},
 //          {"account": "personal accoun", "balance": "30"}
 //        ]
+//    }
+
+//    podejscie 3 użycie transformersa ktory zamieni nam data table na nasze dto
+    @Given("I have positive balance on my account")
+    public void iHavePositiveBalanceOnMyAccount(List<AccountDto> accounts) {
+
+        for (AccountDto account : accounts) {
+            System.out.println("Transformer: " + account.getAccount() + " " + account.getBalance());
+        }
     }
 
+    @When("I send confirmation letter")
+    public void i_send_confirmation_letter(String docString) {
+        System.out.println(docString);
+    }
 
     @When("I request {int} PLN")
     public void iRequestPLN(Integer int1) {
